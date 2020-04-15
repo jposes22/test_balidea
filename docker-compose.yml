@@ -1,0 +1,37 @@
+version: '3'
+services:
+  database:
+    image: wnameless/oracle-xe-11g-r2:latest
+    container_name: oracle11g
+    #volumes:
+     # user: system password: oracle
+     # - ./docker/oracle/oradata:/u01/app/oracle/oradata # persistent oracle database data.
+    ports:
+      - 1521:1521
+      - 5500:5500
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1521"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+  server:
+    image: balidea/liberty-base:v01.00.0000
+    container_name: liberty19
+    ports:
+      - 80:9080
+      - 443:9443
+    #depends_on:
+    #  - database
+    volumes:
+      #- ./msaude-ear/target/msaude-v.01.00.0000-SNAPSHOT.ear:/config/dropins/msaude-v.01.00.0000-SNAPSHOT.ear
+      #- ./config/msaude-ear-1.0.0-SNAPSHOT.ear:/config/dropins/msaude-ear-1.0.0-SNAPSHOT.ear
+      - ./config/server.xml:/config/server.xml
+      - ./config/ojdbc7.jar:/config/JDBCDrivers/ojdbc7.jar
+      - ./target/demo-maven-docker-0.0.1-SNAPSHOT.war:/config/dropins/demo.war
+    links:
+      - database
+
+
+
