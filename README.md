@@ -1,12 +1,15 @@
-#Esto va a tener un conflicto, lo presiento.
+# Getting Started
 
-##borrame
+* Importar el proyecto con maven.
+* Hacer mvn install
+````
+mvn install
+````
+* Lanzar docker compose con el ide o por consola:
+```
+docker-compose -f docker-compose.yml up -d
+```
+* http://localhost/demo-maven-docker-0.0.1-SNAPSHOT/
 
-no me lo creo
-git config http.sslVerify false para poder usarlo en WebStorm
+* El proyecto consta del fichero server.xml de configuración de liberty que es donde se ponen los datasource jndi etc ya está configurado para oracle solo hay que cambiar el nombre del jndi y los credenciales
 
-la vida es muy dura Madafaca's
-
-## sigo con la rama nomelopuedocreer
-
-seguimos con el master y cambio urgente del master 2
